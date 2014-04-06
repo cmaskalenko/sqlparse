@@ -19,7 +19,7 @@
 	frm = 'from'i;
 	on = 'on'i;
 	choice = 'and'i|'or'i;
-    col_id = '[alnum+]'|'alnum+';
+	col_id = '[alnum+]'|'alnum+';
 
 	# Intermediate definitions
 	alias = (space+ as space+);
@@ -33,24 +33,24 @@
 	# Top level definitons
 	join_table = join_type space+ alias_table on on_clause (choice on_clause)*;
 
-    # Machines for sub parts
+	# Machines for sub parts
 	aliased_col = (column @coldef alias? identifier @colname);
 
-    select_parts := ((aliased_col @{ fgoto aliased_col; } .(','.space)?)+ @{ fret; };;
-    join_parts := 
+	select_parts := ((aliased_col @{ fgoto aliased_col; } .(','.space)?)+ @{ fret; };;
+	join_parts := 
 
-    # Actions
-    action coldef {
-    }
+	# Actions
+	action coldef {
+	}
 
-    action colname {
-    }
+	action colname {
+	}
 
 	# Scanner
 	main := |*
 		select => { fcall select_parts; };
-        parenthesis => {};
-        join_table => { fcall join_parts; };
+		parenthesis => {};
+		join_table => { fcall join_parts; };
 	*|;
 
 }%%
