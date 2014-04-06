@@ -1,3 +1,3 @@
 sqlparse
 ========
-A basic T-SQL parser in Ragel.
+A basic T-SQL lexer in Ragel.
