@@ -31,12 +31,26 @@
 	on_clause = aliased_col equalities alaised_col;
 
 	# Top level definitons
-	aliased_col = (column alias? identifier);
 	join_table = join_type space+ alias_table on on_clause (choice on_clause)*;
 
-	# Parser
+    # Machines for sub parts
+	aliased_col = (column @coldef alias? identifier @colname);
+
+    select_parts := ((aliased_col @{ fgoto aliased_col; } .(','.space)?)+ @{ fret; };;
+    join_parts := 
+
+    # Actions
+    action coldef {
+    }
+
+    action colname {
+    }
+
+	# Scanner
 	main := |*
-		
+		select => { fcall select_parts; };
+        parenthesis => {};
+        join_table => { fcall join_parts; };
 	*|;
 
 }%%
