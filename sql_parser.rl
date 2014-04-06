@@ -19,11 +19,12 @@
 	frm = 'from'i;
 	on = 'on'i;
 	choice = 'and'i|'or'i;
+    col_id = '[alnum+]'|'alnum+';
 
 	# Intermediate definitions
 	alias = (space+ as space+);
-	column = (alnum+\.)?(alnum+\.)?(alnum+\.);
-	table = (alnum+\.)?(alnum+\.);
+	column = ((col_id\.)?col_id\.)?col_id;
+	table = (col_id\.)?col_id;
 	identifier = (alnum+);
 	join_type = (type space+ direction)? space+ join;
 	alias_table = table alais identifier;
